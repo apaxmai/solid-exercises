@@ -5,7 +5,7 @@ import java.util.Map;
 
 //SRP: likely OK, not sure if the actual physical storage of
 //jobs should be extracted into a JobContainer, or if it is 
-//a datastructure
+//just a datastructure
 
 public class JobRepository
 {

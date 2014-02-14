@@ -2,7 +2,7 @@ package com.theladders.solid.srp.job.application;
 
 public class JobApplicationService
 {
-	public static boolean validateApplication(
+	public static boolean validateApplicationSuccess(
 			UnprocessedApplication application,
 			JobApplicationRepository repository)
 	{

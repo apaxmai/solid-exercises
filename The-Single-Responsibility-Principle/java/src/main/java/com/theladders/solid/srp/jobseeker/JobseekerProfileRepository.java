@@ -3,6 +3,8 @@ package com.theladders.solid.srp.jobseeker;
 import java.util.HashMap;
 import java.util.Map;
 
+//SRP: OK
+
 public class JobseekerProfileRepository
 {
   private Map<Integer, JobseekerProfile> profiles;

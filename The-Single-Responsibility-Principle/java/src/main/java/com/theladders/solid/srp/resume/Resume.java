@@ -10,7 +10,7 @@ public class Resume
   {
 	
 	//moved the resume validation and exception into ResumeService
-	if( ResumeService.validateResumeName(resumeName) )
+	if( !ResumeService.validateResumeName(resumeName) )
 	{
 		ResumeService.throwResumeNameFailedValidation();
 	}

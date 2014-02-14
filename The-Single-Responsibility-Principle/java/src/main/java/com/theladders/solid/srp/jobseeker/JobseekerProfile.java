@@ -1,5 +1,7 @@
 package com.theladders.solid.srp.jobseeker;
 
+//SRP: OK
+
 public class JobseekerProfile
 {
   private final int id;

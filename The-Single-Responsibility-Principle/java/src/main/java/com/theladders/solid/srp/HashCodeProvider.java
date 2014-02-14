@@ -35,7 +35,4 @@ public class HashCodeProvider
 		return ret;
 	}
 
-
-
-
 }

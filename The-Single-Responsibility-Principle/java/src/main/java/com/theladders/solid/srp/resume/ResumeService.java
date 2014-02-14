@@ -4,7 +4,7 @@ public class ResumeService
 {
 	public static boolean validateResumeName(String resumeName)
 	{
-		return (resumeName == null || resumeName.equals(""));
+		return !(resumeName == null || resumeName.equals(""));
 	}
 
 	public static void throwResumeNameFailedValidation()

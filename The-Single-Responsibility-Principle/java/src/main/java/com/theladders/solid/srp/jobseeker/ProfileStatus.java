@@ -1,5 +1,7 @@
 package com.theladders.solid.srp.jobseeker;
 
+//SRP: OK
+
 public enum ProfileStatus
 {
   INCOMPLETE(17, "Incomplete"),

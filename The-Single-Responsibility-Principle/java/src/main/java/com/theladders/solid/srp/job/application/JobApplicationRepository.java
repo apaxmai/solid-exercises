@@ -26,11 +26,12 @@ public class JobApplicationRepository
   {
     for(SuccessfulApplication application : applications)
     {
-      //applicationRepository don't need to know about getJobseeker or getJob
+      //applicationRepository don't need to know about
+      //getJobseeker or getJob
       //or the use of .equals
       //but it does need to know about applications. So we call
       //application.isFor(jobseeker, job)
-      //I can see how a role that edits the application or jobseeker/job classes
+      //I can see how a role that edits the application/jobseeker/job classes
       //may not need to edit the jobapplicationrepository, so we split these.
       if ( application.isFor(jobseeker, job) )
       {
