@@ -8,11 +8,12 @@ public class Resume
 
   public Resume(String resumeName)
   {
-	//resumename validator?
-    if (resumeName == null || resumeName.equals(""))
-    {
-      throw new NullPointerException("bad resume name");
-    }
+	
+	//moved the resume validation and exception into ResumeService
+	if( ResumeService.validateResumeName(resumeName) )
+	{
+		ResumeService.throwResumeNameFailedValidation();
+	}
 
     this.resumeName = resumeName;
   }
