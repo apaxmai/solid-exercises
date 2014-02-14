@@ -6,6 +6,8 @@ import java.util.List;
 import com.theladders.solid.srp.job.Job;
 import com.theladders.solid.srp.jobseeker.Jobseeker;
 
+//SRP: OK
+
 public class JobApplicationRepository
 {
   private final List<SuccessfulApplication> applications;
@@ -24,8 +26,13 @@ public class JobApplicationRepository
   {
     for(SuccessfulApplication application : applications)
     {
-      if (application.getJobseeker().equals(jobseeker) &&
-          application.getJob().equals(job))
+      //applicationRepository don't need to know about getJobseeker or getJob
+      //or the use of .equals
+      //but it does need to know about applications. So we call
+      //application.isFor(jobseeker, job)
+      //I can see how a role that edits the application or jobseeker/job classes
+      //may not need to edit the jobapplicationrepository, so we split these.
+      if ( application.isFor(jobseeker, job) )
       {
         return true;
       }

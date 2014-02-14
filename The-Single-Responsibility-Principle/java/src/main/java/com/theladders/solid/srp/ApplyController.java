@@ -60,6 +60,7 @@ public class ApplyController
       return response;
     }
 
+    //this is just a data structure, no change.
     Map<String, Object> model = new HashMap<>();
 
     List<String> errList = new ArrayList<>();
@@ -78,9 +79,8 @@ public class ApplyController
     model.put("jobId", job.getJobId());
     model.put("jobTitle", job.getTitle());
 
-    if (!jobseeker.isPremium() && (profile.getStatus().equals(ProfileStatus.INCOMPLETE) ||
-                                   profile.getStatus().equals(ProfileStatus.NO_PROFILE) ||
-                                   profile.getStatus().equals(ProfileStatus.REMOVED)))
+    //this was a business rules check, extracted to Service
+    if ( ApplyService.resumeCompletionRequiredFor(jobseeker, profile) )
     {
       provideResumeCompletionView(response, model);
       return response;
@@ -109,6 +109,8 @@ public class ApplyController
    response.setResult(result);
   }
 
+  // httprequest, 
+  
   private void apply(HttpRequest request,
                      Jobseeker jobseeker,
                      Job job,

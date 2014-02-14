@@ -12,13 +12,15 @@ public class JobApplicationSystem
 
   public JobApplicationResult apply(UnprocessedApplication application)
   {
-    if (application.isValid() &&
-        !repository.applicationExistsFor(application.getJobseeker(), application.getJob()))
+	//there may be a change in the future about applying to
+	//jobs that you have already applied to,
+	//so this is business logic, so
+	//we extract to JobApplicationService.
+	//the other responsibility of this class is to keep track of the repository.
+    if ( JobApplicationService.validateApplication(application, repository) )
     {
-
-      SuccessfulApplication success = new SuccessfulApplication(application.getJobseeker(),
-                                                                application.getJob(),
-                                                                application.getResume());
+      // success = SuccessfulApplication.for(application)
+      SuccessfulApplication success = SuccessfulApplication.with(application);
 
       repository.add(success);
 

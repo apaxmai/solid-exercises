@@ -2,6 +2,8 @@ package com.theladders.solid.srp.http;
 
 import com.theladders.solid.srp.jobseeker.Jobseeker;
 
+//SRP: OK
+
 public class HttpSession
 {
   private final Jobseeker jobseeker;

@@ -19,11 +19,10 @@ public class UnprocessedApplication
     this.resume = resume;
   }
 
+  //validation logic is derived from business logic, extract
   public boolean isValid()
   {
-    return jobseeker != null &&
-           job       != null &&
-           resume    != null;
+	return JobApplicationService.validateUnprocessedApplication(this);
   }
 
   public Jobseeker getJobseeker()

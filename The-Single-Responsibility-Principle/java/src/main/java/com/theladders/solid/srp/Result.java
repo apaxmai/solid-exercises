@@ -3,6 +3,8 @@ package com.theladders.solid.srp;
 import java.util.List;
 import java.util.Map;
 
+// SRP: OK
+
 public class Result
 {
   private final String type;
@@ -31,6 +33,7 @@ public class Result
     return type;
   }
 
+  //will not change this as it is for the developer only
   @Override
   public String toString()
   {

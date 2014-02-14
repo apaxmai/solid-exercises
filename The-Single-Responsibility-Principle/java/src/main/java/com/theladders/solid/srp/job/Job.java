@@ -1,14 +1,19 @@
 package com.theladders.solid.srp.job;
 
+import com.theladders.solid.srp.HashCodeProvider;
+
+//SRP: OK
+
 public class Job
 {
   private final int id;
   private final String title;
 
+  // "This is a job with id:" .... extracted
   public Job(int id)
   {
     this.id = id;
-    this.title = "This is a job with id:" + Integer.toString(id);
+    this.title = JobTitleProvider.titleFor(id);
   }
 
   public int getJobId()
@@ -21,13 +26,13 @@ public class Job
     return title;
   }
 
+  //it is possible that in Java, the responsibility of editing
+  //the algorithm used for hashCode() would fall to a role of
+  //optimization, perhaps a different set of developers, so we extract.
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+	return HashCodeProvider.hashCodeFor(this);
   }
 
   @Override

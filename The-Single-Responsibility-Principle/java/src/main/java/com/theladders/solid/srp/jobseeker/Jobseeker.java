@@ -1,10 +1,15 @@
 package com.theladders.solid.srp.jobseeker;
 
+import com.theladders.solid.srp.HashCodeProvider;
+
 public class Jobseeker
 {
   private final int id;
   private final boolean hasPremiumAccount;
 
+  
+  //todo
+  // MyBusinessLogicClass.accountLevelFor(jobseeker);
   public Jobseeker(int id, boolean hasPremiumAccount)
   {
     this.id = id;
@@ -13,6 +18,7 @@ public class Jobseeker
 
   public boolean isPremium()
   {
+	//return JobseekerService.accountLevelFor(this);
     return hasPremiumAccount;
   }
 
@@ -21,13 +27,13 @@ public class Jobseeker
     return id;
   }
 
+  //it is possible that in Java, the responsibility of editing
+  //the algorithm used for hashCode() would fall to a role of
+  //optimization, perhaps a different set of developers, so we extract.
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + id;
-    return result;
+	return HashCodeProvider.hashCodeFor(this);
   }
 
   @Override

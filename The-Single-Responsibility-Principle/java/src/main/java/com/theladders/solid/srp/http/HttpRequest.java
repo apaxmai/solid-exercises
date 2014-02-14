@@ -2,6 +2,8 @@ package com.theladders.solid.srp.http;
 
 import java.util.Map;
 
+//SRP: OK
+
 public class HttpRequest
 {
   private final HttpSession session;

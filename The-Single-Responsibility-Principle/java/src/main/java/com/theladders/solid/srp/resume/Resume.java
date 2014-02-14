@@ -1,11 +1,14 @@
 package com.theladders.solid.srp.resume;
 
+import com.theladders.solid.srp.HashCodeProvider;
+
 public class Resume
 {
   private final String resumeName;
 
   public Resume(String resumeName)
   {
+	//resumename validator?
     if (resumeName == null || resumeName.equals(""))
     {
       throw new NullPointerException("bad resume name");
@@ -13,14 +16,16 @@ public class Resume
 
     this.resumeName = resumeName;
   }
+  
+  public String getResumeName()
+  {
+	  return resumeName;
+  }
 
   @Override
   public int hashCode()
   {
-    final int prime = 31;
-    int result = 1;
-    result = prime * result + ((resumeName == null) ? 0 : resumeName.hashCode());
-    return result;
+	return HashCodeProvider.hashCodeFor(this);
   }
 
   @Override

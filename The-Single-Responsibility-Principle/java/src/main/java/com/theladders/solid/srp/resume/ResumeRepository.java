@@ -34,6 +34,7 @@ public class ResumeRepository
     return false;
   }
 
+  //why two addingnesses?
   private void addResumeForJobseeker(int jobseekerId, Resume resume)
   {
     List<Resume> jsResumes = resumes.get(jobseekerId);

@@ -1,11 +1,13 @@
 package com.theladders.solid.srp;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import com.theladders.solid.srp.http.HttpRequest;
 import com.theladders.solid.srp.http.HttpResponse;
@@ -16,11 +18,11 @@ import com.theladders.solid.srp.job.JobSearchService;
 import com.theladders.solid.srp.job.application.JobApplicationRepository;
 import com.theladders.solid.srp.job.application.JobApplicationSystem;
 import com.theladders.solid.srp.job.application.SuccessfulApplication;
+import com.theladders.solid.srp.jobseeker.Jobseeker;
 import com.theladders.solid.srp.jobseeker.JobseekerProfile;
 import com.theladders.solid.srp.jobseeker.JobseekerProfileManager;
 import com.theladders.solid.srp.jobseeker.JobseekerProfileRepository;
 import com.theladders.solid.srp.jobseeker.ProfileStatus;
-import com.theladders.solid.srp.jobseeker.Jobseeker;
 import com.theladders.solid.srp.resume.ActiveResumeRepository;
 import com.theladders.solid.srp.resume.MyResumeManager;
 import com.theladders.solid.srp.resume.Resume;

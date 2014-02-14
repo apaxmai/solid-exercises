@@ -1,5 +1,6 @@
 package com.theladders.solid.srp.job;
 
+//SRP: OK
 
 public class JobSearchService
 {
