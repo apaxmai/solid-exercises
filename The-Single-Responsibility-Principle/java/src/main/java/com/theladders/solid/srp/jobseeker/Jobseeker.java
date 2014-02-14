@@ -5,21 +5,22 @@ import com.theladders.solid.srp.HashCodeProvider;
 public class Jobseeker
 {
   private final int id;
-  private final boolean hasPremiumAccount;
-
+  private JobseekerAccountLevel accountLevel;
   
-  //todo
-  // MyBusinessLogicClass.accountLevelFor(jobseeker);
+  // As premium is a business logic concept,
+  // we have separated it from the Jobseeker into
+  // JobseekerAccountLevel. If there are additional
+  // account levels or other changes to that business realm,
+  // Jobseeker need not be modified.
   public Jobseeker(int id, boolean hasPremiumAccount)
   {
     this.id = id;
-    this.hasPremiumAccount = hasPremiumAccount;
+    this.accountLevel = JobseekerAccountLevel.with(hasPremiumAccount);
   }
 
   public boolean isPremium()
   {
-	//return JobseekerService.accountLevelFor(this);
-    return hasPremiumAccount;
+	return accountLevel.isPremium();
   }
 
   public int getId()
