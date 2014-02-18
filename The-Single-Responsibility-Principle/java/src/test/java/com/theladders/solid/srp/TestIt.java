@@ -38,7 +38,7 @@ public class TestIt
   private static final int APPROVED_JOBSEEKER    = 1010;
 
   private ApplyController            controller;
-  private ApplyEndpointHTTP			 endpoint;
+  private ApplyEndpointHTTP	     endpoint;
   private JobRepository              jobRepository;
   private ResumeRepository           resumeRepository;
   private JobApplicationRepository   jobApplicationRepository;
@@ -200,6 +200,7 @@ public class TestIt
     assertTrue(resumeRepository.contains(new Resume(SHARED_RESUME_NAME)));
   }
 
+  
   @Test
   public void resumeIsMadeActive()
   {
