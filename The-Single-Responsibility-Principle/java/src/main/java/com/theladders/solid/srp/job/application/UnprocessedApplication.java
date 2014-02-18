@@ -7,8 +7,9 @@ import com.theladders.solid.srp.resume.Resume;
 public class UnprocessedApplication
 {
   private final Jobseeker jobseeker;
-  private final Job job;
-  private final Resume resume;
+  private final Job       job;
+  private final Resume    resume;
+
 
   public UnprocessedApplication(Jobseeker jobseeker,
                                 Job job,
@@ -19,21 +20,25 @@ public class UnprocessedApplication
     this.resume = resume;
   }
 
-  //validation logic is derived from business logic, extract
+
+  // validation logic is derived from business logic, extract
   public boolean isValid()
   {
-	return JobApplicationValidator.validateUnprocessedApplication(this);
+    return JobApplicationValidator.validateUnprocessedApplication(this);
   }
+
 
   public Jobseeker getJobseeker()
   {
     return jobseeker;
   }
 
+
   public Job getJob()
   {
     return job;
   }
+
 
   public Resume getResume()
   {

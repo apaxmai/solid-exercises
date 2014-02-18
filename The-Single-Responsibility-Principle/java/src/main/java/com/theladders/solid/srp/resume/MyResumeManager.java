@@ -6,16 +6,19 @@ public class MyResumeManager
 {
   private final ActiveResumeRepository repository;
 
+
   public MyResumeManager(ActiveResumeRepository repository)
   {
     this.repository = repository;
   }
+
 
   public void saveAsActive(Jobseeker jobseeker,
                            Resume resume)
   {
     repository.makeActive(jobseeker.getId(), resume);
   }
+
 
   public Resume getActiveResume(int jobseekerId)
   {

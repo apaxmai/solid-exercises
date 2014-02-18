@@ -7,33 +7,37 @@ import java.util.Map;
 
 public class Result
 {
-  private final String type;
+  private final String              type;
   private final Map<String, Object> model;
-  private final List<String> errorList;
+  private final List<String>        errorList;
+
 
   public Result(String type,
                 Map<String, Object> model)
   {
-    this.type  = type;
+    this.type = type;
     this.model = model;
     this.errorList = null;
   }
+
 
   public Result(String type,
                 Map<String, Object> model,
                 List<String> errList)
   {
-    this.type  = type;
+    this.type = type;
     this.model = model;
     this.errorList = errList;
   }
+
 
   public String getType()
   {
     return type;
   }
 
-  //will not change this as it is for the developer only
+
+  // will not change this as it is for the developer only
   @Override
   public String toString()
   {

@@ -7,15 +7,12 @@ import com.theladders.solid.srp.jobseeker.ProfileStatus;
 public class ApplyValidator
 {
 
-	public static boolean resumeCompletionRequiredFor(Jobseeker jobseeker,
-			JobseekerProfile profile)
-	{ 
-		return (!jobseeker.isPremium() &&
-				(
-					profile.getStatus().equals(ProfileStatus.INCOMPLETE) ||
-					profile.getStatus().equals(ProfileStatus.NO_PROFILE) ||
-					profile.getStatus().equals(ProfileStatus.REMOVED))
-				);
-	}
+  public static boolean resumeCompletionRequiredFor(Jobseeker jobseeker,
+                                                    JobseekerProfile profile)
+  {
+    return (!jobseeker.isPremium() && (profile.getStatus().equals(ProfileStatus.INCOMPLETE) || profile.getStatus()
+                                                                                                      .equals(ProfileStatus.NO_PROFILE) || profile.getStatus()
+                                                                                                                                                  .equals(ProfileStatus.REMOVED)));
+  }
 
 }

@@ -6,28 +6,32 @@ public class Resume
 {
   private final String resumeName;
 
+
   public Resume(String resumeName)
   {
-	
-	//moved the resume validation and exception into ResumeService
-	if( !ResumeValidator.validateResumeName(resumeName) )
-	{
-		ResumeValidator.throwResumeNameFailedValidation();
-	}
+
+    // moved the resume validation and exception into ResumeService
+    if (!ResumeValidator.validateResumeName(resumeName))
+    {
+      ResumeValidator.throwResumeNameFailedValidation();
+    }
 
     this.resumeName = resumeName;
   }
-  
+
+
   public String getResumeName()
   {
-	  return resumeName;
+    return resumeName;
   }
+
 
   @Override
   public int hashCode()
   {
-	return HashCodeProvider.hashCodeFor(this, this.resumeName);
+    return HashCodeProvider.hashCodeFor(this, this.resumeName);
   }
+
 
   @Override
   public boolean equals(Object obj)

@@ -6,12 +6,14 @@ public class ResumeManager
 {
   private final ResumeRepository resumeRepository;
 
+
   public ResumeManager(ResumeRepository resumeRepository)
   {
     this.resumeRepository = resumeRepository;
   }
 
-  //is this doing >1 things? creating resume from filename and saving
+
+  // is this doing >1 things? creating resume from filename and saving
   public Resume saveResume(Jobseeker jobseeker,
                            String fileName)
   {

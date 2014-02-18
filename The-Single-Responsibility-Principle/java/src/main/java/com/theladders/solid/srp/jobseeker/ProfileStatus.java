@@ -1,6 +1,6 @@
 package com.theladders.solid.srp.jobseeker;
 
-//SRP: OK
+// SRP: OK
 
 public enum ProfileStatus
 {
@@ -17,6 +17,7 @@ public enum ProfileStatus
 
   private int    id;
   private String name;
+
 
   ProfileStatus(final int id,
                 final String name)

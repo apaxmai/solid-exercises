@@ -1,6 +1,6 @@
 package com.theladders.solid.srp.job.application;
 
-//SRP: OK
+// SRP: OK
 
 public class ApplicationFailureException extends RuntimeException
 {
