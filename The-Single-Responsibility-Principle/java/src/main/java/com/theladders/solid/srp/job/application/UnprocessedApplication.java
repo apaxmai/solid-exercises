@@ -22,7 +22,7 @@ public class UnprocessedApplication
   //validation logic is derived from business logic, extract
   public boolean isValid()
   {
-	return JobApplicationService.validateUnprocessedApplication(this);
+	return JobApplicationValidator.validateUnprocessedApplication(this);
   }
 
   public Jobseeker getJobseeker()

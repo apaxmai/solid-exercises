@@ -10,9 +10,9 @@ public class Resume
   {
 	
 	//moved the resume validation and exception into ResumeService
-	if( !ResumeService.validateResumeName(resumeName) )
+	if( !ResumeValidator.validateResumeName(resumeName) )
 	{
-		ResumeService.throwResumeNameFailedValidation();
+		ResumeValidator.throwResumeNameFailedValidation();
 	}
 
     this.resumeName = resumeName;
@@ -26,7 +26,7 @@ public class Resume
   @Override
   public int hashCode()
   {
-	return HashCodeProvider.hashCodeFor(this);
+	return HashCodeProvider.hashCodeFor(this, this.resumeName);
   }
 
   @Override

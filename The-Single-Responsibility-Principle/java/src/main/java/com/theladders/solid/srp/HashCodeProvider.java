@@ -1,26 +1,25 @@
 package com.theladders.solid.srp;
 
-import com.theladders.solid.srp.job.Job;
-import com.theladders.solid.srp.jobseeker.Jobseeker;
-import com.theladders.solid.srp.resume.Resume;
+import java.util.HashMap;
 
 public class HashCodeProvider
 {
-	private static final int[] primes = {3,5,7,11,13,17,19,23,29,31,37};
+	private static Integer lastPrime = 1;
+	private static HashMap<String, Integer> primeForType = new HashMap<String, Integer>();
 	
-	public static int hashCodeFor(Job job)
+	public static int hashCodeFor(Object object, Object ...objects)
 	{
-		return primes[0] * hashCodeAlgorithm(job.getJobId());
-	}
-	public static int hashCodeFor(Jobseeker jobseeker)
-	{
-		return primes[1] * hashCodeAlgorithm(jobseeker.getId());
-	}
-	public static int hashCodeFor(Resume resume)
-	{
-		return primes[2] * hashCodeAlgorithm(resume.getResumeName());
+		String typename = object.getClass().toString();
+		
+		if( ! primeForType.containsKey(typename) )
+		{
+			primeForType.put(typename, getNextPrime());
+		}
+
+		return primeForType.get(typename) * hashCodeAlgorithm(objects);
 	}
 	
+	//this would be a better algorithm
 	private static int hashCodeAlgorithm(Object ...objects)
 	{
 		int ret = 0;
@@ -31,8 +30,13 @@ public class HashCodeProvider
 				ret ^= object.hashCode();
 			}
 		}
-		
 		return ret;
 	}
 
+	//this would be a miller-rabin or something in real code
+	private static int getNextPrime()
+	{
+		lastPrime += 2;
+		return lastPrime;
+	}
 }

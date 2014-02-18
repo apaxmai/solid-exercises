@@ -32,7 +32,7 @@ public class Job
   @Override
   public int hashCode()
   {
-	return HashCodeProvider.hashCodeFor(this);
+	return HashCodeProvider.hashCodeFor(this, this.id);
   }
 
   @Override

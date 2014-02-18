@@ -17,7 +17,7 @@ public class JobApplicationSystem
 	//so this is business logic, so
 	//we extract to JobApplicationService.
 	//the other responsibility of this class is to keep track of the repository.
-    if ( JobApplicationService.validateApplicationSuccess(application, repository) )
+    if ( JobApplicationValidator.validateApplicationSuccess(application, repository) )
     {
       SuccessfulApplication success = SuccessfulApplication.with(application);
 

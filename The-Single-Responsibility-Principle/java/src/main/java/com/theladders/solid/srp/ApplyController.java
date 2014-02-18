@@ -9,6 +9,7 @@ import com.theladders.solid.srp.http.HttpRequest;
 import com.theladders.solid.srp.http.HttpResponse;
 import com.theladders.solid.srp.job.Job;
 import com.theladders.solid.srp.job.JobSearchService;
+import com.theladders.solid.srp.job.JobViewProvider;
 import com.theladders.solid.srp.job.application.ApplicationFailureException;
 import com.theladders.solid.srp.job.application.JobApplicationResult;
 import com.theladders.solid.srp.job.application.JobApplicationSystem;
@@ -20,6 +21,9 @@ import com.theladders.solid.srp.jobseeker.Jobseeker;
 import com.theladders.solid.srp.resume.MyResumeManager;
 import com.theladders.solid.srp.resume.Resume;
 import com.theladders.solid.srp.resume.ResumeManager;
+import com.theladders.solid.srp.resume.ResumeViewProvider;
+
+//this gets split up
 
 public class ApplyController
 {
@@ -56,7 +60,7 @@ public class ApplyController
 
     if (job == null)
     {
-      provideInvalidJobView(response, jobId);
+      JobViewProvider.invalidViewFor(response, jobId);
       return response;
     }
 
@@ -71,8 +75,11 @@ public class ApplyController
     }
     catch (Exception e)
     {
-      errList.add("We could not process your application.");
-      provideErrorView(response, errList, model);
+      //extracted responsibility to ApplyErrorProvider
+      errList.add(ApplyErrorProvider.genericFail);
+      
+      //extracted responsibility to *ViewProvider
+      ApplyViewProvider.errorViewFor(response, errList, model);
       return response;
     }
 
@@ -80,37 +87,20 @@ public class ApplyController
     model.put("jobTitle", job.getTitle());
 
     //this was a business rules check, extracted to Service
-    if ( ApplyService.resumeCompletionRequiredFor(jobseeker, profile) )
+    if ( ApplyValidator.resumeCompletionRequiredFor(jobseeker, profile) )
     {
-      provideResumeCompletionView(response, model);
+      //extracted responsibility to *ViewProvider
+      ResumeViewProvider.completionViewFor(response, model);
       return response;
     }
 
-    provideApplySuccessView(response, model);
+    //extracted responsibility to *ViewProvider
+    ApplyViewProvider.successViewFor(response, model);
 
     return response;
   }
 
-  private static void provideApplySuccessView(HttpResponse response, Map<String, Object> model)
-  {
-    Result result = new Result("success", model);
-    response.setResult(result);
-  }
-
-  private static void provideResumeCompletionView(HttpResponse response, Map<String, Object> model)
-  {
-    Result result = new Result("completeResumePlease", model);
-    response.setResult(result);
-  }
-
-  private static void provideErrorView(HttpResponse response, List<String> errList, Map<String, Object> model)
-  {
-   Result result = new Result("error", model, errList);
-   response.setResult(result);
-  }
-
   // httprequest, 
-  
   private void apply(HttpRequest request,
                      Jobseeker jobseeker,
                      Job job,
@@ -149,12 +139,4 @@ public class ApplyController
     return resume;
   }
 
-  private static void provideInvalidJobView(HttpResponse response, int jobId)
-  {
-    Map<String, Object> model = new HashMap<>();
-    model.put("jobId", jobId);
-
-    Result result = new Result("invalidJob", model);
-    response.setResult(result);
-  }
 }

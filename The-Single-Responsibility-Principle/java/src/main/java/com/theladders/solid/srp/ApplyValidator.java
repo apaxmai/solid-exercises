@@ -4,7 +4,7 @@ import com.theladders.solid.srp.jobseeker.Jobseeker;
 import com.theladders.solid.srp.jobseeker.JobseekerProfile;
 import com.theladders.solid.srp.jobseeker.ProfileStatus;
 
-public class ApplyService
+public class ApplyValidator
 {
 
 	public static boolean resumeCompletionRequiredFor(Jobseeker jobseeker,

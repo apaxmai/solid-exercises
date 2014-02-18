@@ -1,6 +1,6 @@
 package com.theladders.solid.srp.job.application;
 
-public class JobApplicationService
+public class JobApplicationValidator
 {
 	public static boolean validateApplicationSuccess(
 			UnprocessedApplication application,
