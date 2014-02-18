@@ -27,81 +27,20 @@ import com.theladders.solid.srp.resume.ResumeViewProvider;
 
 public class ApplyController
 {
-  private final JobseekerProfileManager jobseekerProfileManager;
-  private final JobSearchService        jobSearchService;
   private final JobApplicationSystem    jobApplicationSystem;
   private final ResumeManager           resumeManager;
   private final MyResumeManager         myResumeManager;
 
-  public ApplyController(JobseekerProfileManager jobseekerProfileManager,
-                         JobSearchService jobSearchService,
-                         JobApplicationSystem jobApplicationSystem,
+  public ApplyController(JobApplicationSystem jobApplicationSystem,
                          ResumeManager resumeManager,
                          MyResumeManager myResumeManager)
   {
-    this.jobseekerProfileManager = jobseekerProfileManager;
-    this.jobSearchService = jobSearchService;
     this.jobApplicationSystem = jobApplicationSystem;
     this.resumeManager = resumeManager;
     this.myResumeManager = myResumeManager;
   }
 
-  public HttpResponse handle(HttpRequest request,
-                             HttpResponse response,
-                             String origFileName)
-  {
-    Jobseeker jobseeker = request.getSession().getJobseeker();
-    JobseekerProfile profile = jobseekerProfileManager.getJobSeekerProfile(jobseeker);
-
-    String jobIdString = request.getParameter("jobId");
-    int jobId = Integer.parseInt(jobIdString);
-
-    Job job = jobSearchService.getJob(jobId);
-
-    if (job == null)
-    {
-      JobViewProvider.invalidViewFor(response, jobId);
-      return response;
-    }
-
-    //this is just a data structure, no change.
-    Map<String, Object> model = new HashMap<>();
-
-    List<String> errList = new ArrayList<>();
-
-    try
-    {
-      apply(request, jobseeker, job, origFileName);
-    }
-    catch (Exception e)
-    {
-      //extracted responsibility to ApplyErrorProvider
-      errList.add(ApplyErrorProvider.genericFail);
-      
-      //extracted responsibility to *ViewProvider
-      ApplyViewProvider.errorViewFor(response, errList, model);
-      return response;
-    }
-
-    model.put("jobId", job.getJobId());
-    model.put("jobTitle", job.getTitle());
-
-    //this was a business rules check, extracted to Service
-    if ( ApplyValidator.resumeCompletionRequiredFor(jobseeker, profile) )
-    {
-      //extracted responsibility to *ViewProvider
-      ResumeViewProvider.completionViewFor(response, model);
-      return response;
-    }
-
-    //extracted responsibility to *ViewProvider
-    ApplyViewProvider.successViewFor(response, model);
-
-    return response;
-  }
-
-  // httprequest, 
-  private void apply(HttpRequest request,
+  void apply(HttpRequest request,
                      Jobseeker jobseeker,
                      Job job,
                      String fileName)
