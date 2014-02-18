@@ -31,7 +31,6 @@ public class ResumeStorageController
     return (resumeCommand.equals(ResumeCommandProvider.useExistingResumeCommand)) ? retrieveActiveResume(jobseeker) : saveNewResume(newResumeFileName, jobseeker, request);
   }
   
-  //these could be in a container type e.g. resumeContainer
   private Resume retrieveActiveResume(Jobseeker jobseeker)
   {
     return myResumeManager.getActiveResume(jobseeker.getId());
@@ -43,11 +42,20 @@ public class ResumeStorageController
     resume = resumeManager.saveResume(jobseeker, newResumeFileName);
 
     String activeResumeCommand = request.getParameter("makeResumeActive");
-    if (resume != null && activeResumeCommand.equals(ResumeCommandProvider.makeResumeActiveCommand))
+    if( shouldMakeResumeActive(newResumeFileName, activeResumeCommand, resume) )
     {
       myResumeManager.saveAsActive(jobseeker, resume);
     }
     
     return resume;
+  }
+  
+  private boolean shouldMakeResumeActive(String newResumeFileName, String activeResumeCommand, Resume resume)
+  {
+    if(resume != null && activeResumeCommand.equals(ResumeCommandProvider.makeResumeActiveCommand))
+    {
+      return true;
+    }
+    return false;
   }
 }

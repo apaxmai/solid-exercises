@@ -28,7 +28,6 @@ public class ApplyEndpointHTTP
     this.jobSearchService = jobSearchService;
   }
 
-
   // the workflow for handling a httprequest
   public HttpResponse handle(ApplyController controller,
                              HttpRequest request,
