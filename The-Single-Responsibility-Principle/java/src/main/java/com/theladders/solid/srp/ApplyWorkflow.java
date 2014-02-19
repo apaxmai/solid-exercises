@@ -11,12 +11,20 @@ import com.theladders.solid.srp.resume.MyResumeManager;
 import com.theladders.solid.srp.resume.Resume;
 import com.theladders.solid.srp.resume.ResumeManager;
 
-public class ApplyController
+/*
+ * 
+ * The current responsibilities of this class are to the roles of:
+ * 1) Developers that work on the HTTP endpoint that it used to apply, this includes the specification of the request.
+ * 2) jobapplicationsystem / resumestoragecontroller
+ * 
+ */
+
+public class ApplyWorkflow
 {
   private final JobApplicationSystem    jobApplicationSystem;
   private final ResumeStorageController resumeStorageController;
 
-  public ApplyController(JobApplicationSystem jobApplicationSystem,
+  public ApplyWorkflow(JobApplicationSystem jobApplicationSystem,
                          ResumeManager resumeManager,
                          MyResumeManager myResumeManager)
   {
@@ -25,12 +33,16 @@ public class ApplyController
   }
 
 
-  void apply(HttpRequest request,
+  void apply(String resumeCommand,
+             String activeResumeCommand,
              Jobseeker jobseeker,
              Job job,
              String fileName)
   {
-    Resume resume = resumeStorageController.saveNewOrRetrieveExistingResume(fileName, jobseeker, request);
+    Resume resume = resumeStorageController.saveNewOrRetrieveExistingResume(fileName,
+                                                                            jobseeker,
+                                                                            resumeCommand,
+                                                                            activeResumeCommand);
     UnprocessedApplication application = new UnprocessedApplication(jobseeker, job, resume);
     JobApplicationResult applicationResult = jobApplicationSystem.apply(application);
 
@@ -39,5 +51,5 @@ public class ApplyController
       throw new ApplicationFailureException(applicationResult.toString());
     }
   }
-
+  
 }

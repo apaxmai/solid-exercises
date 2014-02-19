@@ -24,4 +24,10 @@ public class MyResumeManager
   {
     return repository.activeResumeFor(jobseekerId);
   }
+
+
+  public Resume getActiveResumeForJobseeker(Jobseeker jobseeker)
+  {
+    return repository.activeResumeFor(jobseeker.getId());
+  }
 }

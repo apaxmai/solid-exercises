@@ -2,6 +2,13 @@ package com.theladders.solid.srp;
 
 import java.util.HashMap;
 
+/*
+ * 
+ * The current responsibilities of this class are to the roles of:
+ * 1) Developers that work on the algorithm used to compute HashCode(s) for all objects.
+ * 
+ */
+
 public class HashCodeProvider
 {
   private static Integer                  lastPrime    = 1;

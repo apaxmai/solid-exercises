@@ -37,8 +37,8 @@ public class TestIt
   private static final int INCOMPLETE_JOBSEEKER  = 888;
   private static final int APPROVED_JOBSEEKER    = 1010;
 
-  private ApplyController            controller;
-  private ApplyEndpointHTTP	     endpoint;
+  private ApplyEndpointHTTP          endpoint;
+  private ApplyWorkflow	             controller;
   private JobRepository              jobRepository;
   private ResumeRepository           resumeRepository;
   private JobApplicationRepository   jobApplicationRepository;
@@ -60,7 +60,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("success", response.getResultType());
@@ -79,7 +78,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("success", response.getResultType());
@@ -99,7 +97,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("success", response.getResultType());
@@ -118,7 +115,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("invalidJob", response.getResultType());
@@ -137,7 +133,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, null);
     endpoint.handle(controller, request, response, null);
 
     assertEquals("error", response.getResultType());
@@ -156,7 +151,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("error", response.getResultType());
@@ -175,7 +169,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertEquals("completeResumePlease", response.getResultType());
@@ -194,7 +187,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, SHARED_RESUME_NAME);
     endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
     
     assertTrue(resumeRepository.contains(new Resume(SHARED_RESUME_NAME)));
@@ -215,7 +207,6 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    //controller.handle(request, response, "Save Me Seymour");
     endpoint.handle(controller, request, response, "Save Me Seymour");
     
     assertEquals(new Resume("Save Me Seymour"), activeResumeRepository.activeResumeFor(APPROVED_JOBSEEKER));
@@ -309,7 +300,7 @@ public class TestIt
 
     endpoint = new ApplyEndpointHTTP(jobseekerProfileManager, jobSearchService);
     
-    controller = new ApplyController(jobApplicationSystem,
+    controller = new ApplyWorkflow(jobApplicationSystem,
                                      resumeManager,
                                      myResumeManager);
   }
