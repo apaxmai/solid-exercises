@@ -10,12 +10,13 @@ import com.theladders.solid.srp.jobseeker.Jobseeker;
 import com.theladders.solid.srp.resume.MyResumeManager;
 import com.theladders.solid.srp.resume.Resume;
 import com.theladders.solid.srp.resume.ResumeManager;
+import com.theladders.solid.srp.resume.ResumeName;
+import com.theladders.solid.srp.resume.ResumeStorageController;
 
 /*
  * 
  * The current responsibilities of this class are to the roles of:
- * 1) Developers that work on the HTTP endpoint that it used to apply, this includes the specification of the request.
- * 2) jobapplicationsystem / resumestoragecontroller
+ * 1) ???
  * 
  */
 
@@ -33,13 +34,14 @@ public class ApplyWorkflow
   }
 
 
-  void apply(String resumeCommand,
+  void apply(ResumeName resumeName,
+             String resumeCommand,
              String activeResumeCommand,
              Jobseeker jobseeker,
-             Job job,
-             String fileName)
+             Job job
+             )
   {
-    Resume resume = resumeStorageController.saveNewOrRetrieveExistingResume(fileName,
+    Resume resume = resumeStorageController.saveNewOrRetrieveExistingResume(resumeName,
                                                                             jobseeker,
                                                                             resumeCommand,
                                                                             activeResumeCommand);

@@ -1,11 +1,7 @@
-package com.theladders.solid.srp;
+package com.theladders.solid.srp.resume;
 
 import com.theladders.solid.srp.http.HttpRequest;
 import com.theladders.solid.srp.jobseeker.Jobseeker;
-import com.theladders.solid.srp.resume.MyResumeManager;
-import com.theladders.solid.srp.resume.Resume;
-import com.theladders.solid.srp.resume.ResumeCommandProvider;
-import com.theladders.solid.srp.resume.ResumeManager;
 
 /*
  * 
@@ -26,13 +22,13 @@ public class ResumeStorageController
     return new ResumeStorageController(resumeManager, myResumeManager);
   }
   
-  public Resume saveNewOrRetrieveExistingResume(String newResumeFileName,
+  public Resume saveNewOrRetrieveExistingResume(ResumeName resumeName,
                                                 Jobseeker jobseeker,
                                                 String resumeCommand,
                                                 String activeResumeCommand)
   {
     return (ResumeCommandProvider.useExistingResumeCommand.equals(resumeCommand)) ? retrieveActiveResume(jobseeker)
-                                                                                 : saveNewResume(newResumeFileName,
+                                                                                 : saveNewResume(resumeName,
                                                                                                  jobseeker,
                                                                                                  activeResumeCommand);
   }
@@ -50,12 +46,12 @@ public class ResumeStorageController
     return myResumeManager.getActiveResumeForJobseeker(jobseeker);
   }
 
-  private Resume saveNewResume(String newResumeFileName,
+  private Resume saveNewResume(ResumeName resumeName,
                                Jobseeker jobseeker,
                                String activeResumeCommand)
   {
     Resume resume;
-    resume = resumeManager.saveResume(jobseeker, newResumeFileName);
+    resume = resumeManager.saveResume(jobseeker, resumeName.name());
 
     if (resume != null && ResumeCommandProvider.makeResumeActiveCommand.equals(activeResumeCommand))
     {

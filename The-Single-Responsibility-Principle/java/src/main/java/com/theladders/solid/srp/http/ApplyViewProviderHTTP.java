@@ -1,11 +1,11 @@
-package com.theladders.solid.srp;
+package com.theladders.solid.srp.http;
 
 import java.util.List;
 import java.util.Map;
 
-import com.theladders.solid.srp.http.HttpResponse;
+import com.theladders.solid.srp.Result;
 
-public class ApplyViewProvider
+public class ApplyViewProviderHTTP
 {
   public static void successViewFor(HttpResponse response,
                                     Map<String, Object> model)

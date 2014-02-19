@@ -6,7 +6,7 @@ import java.util.Map;
 import com.theladders.solid.srp.Result;
 import com.theladders.solid.srp.http.HttpResponse;
 
-public class JobViewProvider
+public class JobViewProviderHTTP
 {
   public static void invalidViewFor(HttpResponse response,
                                     int jobId)

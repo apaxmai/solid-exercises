@@ -9,6 +9,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.theladders.solid.srp.http.ApplyEndpointHTTP;
 import com.theladders.solid.srp.http.HttpRequest;
 import com.theladders.solid.srp.http.HttpResponse;
 import com.theladders.solid.srp.http.HttpSession;
@@ -27,6 +28,7 @@ import com.theladders.solid.srp.resume.ActiveResumeRepository;
 import com.theladders.solid.srp.resume.MyResumeManager;
 import com.theladders.solid.srp.resume.Resume;
 import com.theladders.solid.srp.resume.ResumeManager;
+import com.theladders.solid.srp.resume.ResumeName;
 import com.theladders.solid.srp.resume.ResumeRepository;
 
 public class TestIt
@@ -38,7 +40,8 @@ public class TestIt
   private static final int APPROVED_JOBSEEKER    = 1010;
 
   private ApplyEndpointHTTP          endpoint;
-  private ApplyWorkflow	             controller;
+  private ApplyController            controller;
+  private ApplyWorkflow	             workflow;
   private JobRepository              jobRepository;
   private ResumeRepository           resumeRepository;
   private JobApplicationRepository   jobApplicationRepository;
@@ -60,7 +63,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertEquals("success", response.getResultType());
   }
@@ -78,7 +81,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertEquals("success", response.getResultType());
   }
@@ -97,7 +100,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertEquals("success", response.getResultType());
   }
@@ -115,7 +118,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertEquals("invalidJob", response.getResultType());
   }
@@ -133,7 +136,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, null);
+    endpoint.handle(workflow, request, response, null);
 
     assertEquals("error", response.getResultType());
   }
@@ -151,7 +154,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertEquals("error", response.getResultType());
   }
@@ -169,8 +172,9 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
-    
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
+    System.out.println("should be completeResumePlease: "+ response.getResultType() );
+
     assertEquals("completeResumePlease", response.getResultType());
   }
 
@@ -187,7 +191,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, SHARED_RESUME_NAME);
+    endpoint.handle(workflow, request, response, new ResumeName(SHARED_RESUME_NAME));
     
     assertTrue(resumeRepository.contains(new Resume(SHARED_RESUME_NAME)));
   }
@@ -207,7 +211,7 @@ public class TestIt
 
     HttpResponse response = new HttpResponse();
 
-    endpoint.handle(controller, request, response, "Save Me Seymour");
+    endpoint.handle(workflow, request, response, new ResumeName("Save Me Seymour"));
     
     assertEquals(new Resume("Save Me Seymour"), activeResumeRepository.activeResumeFor(APPROVED_JOBSEEKER));
   }
@@ -297,10 +301,9 @@ public class TestIt
     JobApplicationSystem jobApplicationSystem = new JobApplicationSystem(jobApplicationRepository);
     ResumeManager resumeManager = new ResumeManager(resumeRepository);
     MyResumeManager myResumeManager = new MyResumeManager(activeResumeRepository);
-
-    endpoint = new ApplyEndpointHTTP(jobseekerProfileManager, jobSearchService);
-    
-    controller = new ApplyWorkflow(jobApplicationSystem,
+    endpoint = new ApplyEndpointHTTP();
+    controller = new ApplyController(jobseekerProfileManager, jobSearchService);
+    workflow = new ApplyWorkflow(jobApplicationSystem,
                                      resumeManager,
                                      myResumeManager);
   }
