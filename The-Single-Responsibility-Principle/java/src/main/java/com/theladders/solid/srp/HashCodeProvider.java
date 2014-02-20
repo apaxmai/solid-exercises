@@ -29,7 +29,7 @@ public class HashCodeProvider
   }
 
 
-  // this would be a better algorithm
+  // this would be a real algorithm
   private static int hashCodeAlgorithm(Object... objects)
   {
     int ret = 0;

@@ -16,7 +16,7 @@ import com.theladders.solid.srp.resume.ResumeStorageController;
 /*
  * 
  * The current responsibilities of this class are to the roles of:
- * 1) ???
+ * 1) workflow engineer
  * 
  */
 
