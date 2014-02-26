@@ -2,6 +2,8 @@ package com.theladders.solid.ocp.resume;
 
 import com.theladders.solid.ocp.user.User;
 
+//inside closed-for-modification boundary
+
 public class ResumeConfidentialityManager
 {
   private final ConfidentialResumeHandler confidentialResumeHandler;

@@ -6,6 +6,9 @@ import java.util.Map;
 
 import com.theladders.solid.ocp.resume.ConfidentialPhrase;
 import com.theladders.solid.ocp.resume.ConfidentialPhraseCategory;
+import com.theladders.solid.ocp.resume.ConfidentialPhraseCategories;
+
+//inside closed-for-modification boundary
 
 public class JobseekerConfidentialityProfile
 {
@@ -16,6 +19,30 @@ public class JobseekerConfidentialityProfile
     confidentialityProfile = new HashMap<>();
   }
 
+  public boolean resetAllConfidentialFlags()
+  {
+	  boolean isChanged = false;
+	  
+	  for(ConfidentialPhraseCategory category : ConfidentialPhraseCategories.allCategories() )
+	  {
+		  isChanged |= resetConfidentialFlagsForCategory(category);
+	  }
+	  
+	  return isChanged;
+  }
+  
+  public boolean resetContactInfoConfidentialFlags()
+  {
+    boolean isChanged = false;
+    
+	  for(ConfidentialPhraseCategory category : ConfidentialPhraseCategories.contactInfoCategories() )
+	  {
+		  isChanged |= resetConfidentialFlagsForCategory(category);
+	  }
+	
+    return isChanged;
+  }
+  
   public boolean resetConfidentialFlagsForCategory(ConfidentialPhraseCategory category)
   {
     boolean isChanged = false;
@@ -40,4 +67,5 @@ public class JobseekerConfidentialityProfile
   {
     return confidentialityProfile.get(category.name());
   }
+
 }

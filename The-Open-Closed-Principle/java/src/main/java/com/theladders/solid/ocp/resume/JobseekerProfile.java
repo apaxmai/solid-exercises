@@ -1,5 +1,7 @@
 package com.theladders.solid.ocp.resume;
 
+//inside closed-for-modification boundary
+
 public class JobseekerProfile
 {
   private int id;
